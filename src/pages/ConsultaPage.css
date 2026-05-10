@@ -1,0 +1,367 @@
+/* TABS DE MODO */
+.modo-tabs {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px;
+  margin-bottom: 32px;
+  background: var(--bg-card);
+  width: fit-content;
+}
+
+.modo-tabs button {
+  padding: 10px 24px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  transition: all var(--transition);
+  cursor: pointer;
+  border: none;
+}
+
+.modo-tabs button.active {
+  background: var(--accent);
+  color: #0a0a0f;
+  font-weight: 700;
+}
+
+/* SEÇÃO PLACA */
+.placa-section {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.placa-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px 40px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.placa-icon {
+  font-size: 40px;
+}
+
+.placa-card h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.placa-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+.placa-input-wrap {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.placa-input {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 18px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 3px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: border-color var(--transition);
+}
+
+.placa-input:focus {
+  border-color: var(--accent);
+}
+
+.placa-input::placeholder {
+  color: var(--text-muted);
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+
+.btn-consultar-placa {
+  background: var(--accent);
+  color: #0a0a0f;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--transition);
+  white-space: nowrap;
+}
+
+.btn-consultar-placa:hover {
+  opacity: 0.9;
+}
+
+.placa-erro {
+  color: var(--danger);
+  font-size: 13px;
+  margin-top: -8px;
+}
+
+.placa-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: -8px;
+}
+
+.consulta-root {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+
+.consulta-main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 24px 120px;
+}
+
+.consulta-header {
+  margin-bottom: 40px;
+}
+
+.consulta-header h1 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.consulta-header p {
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.consulta-erro {
+  background: rgba(255, 79, 79, 0.08);
+  border: 1px solid rgba(255, 79, 79, 0.25);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  color: var(--danger);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.consulta-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* STEP CARD */
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+
+.step-card.done {
+  border-color: rgba(232, 255, 71, 0.2);
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+}
+
+.step-num {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+  min-width: 28px;
+}
+
+.step-header > div {
+  flex: 1;
+}
+
+.step-header h2 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.step-selected {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  display: block;
+}
+
+.step-change {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 12px;
+  padding: 5px 12px;
+  transition: all var(--transition);
+}
+
+.step-change:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.step-body {
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--border);
+}
+
+.step-loading {
+  padding: 24px 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.search-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text);
+  margin: 16px 0 14px;
+  transition: border-color var(--transition);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* CHIPS */
+.chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.anos-grid {
+  max-height: 200px;
+}
+
+.chip {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-mid);
+  font-size: 13px;
+  padding: 7px 14px;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim2);
+}
+
+.chip-active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* FOOTER */
+.consulta-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  z-index: 50;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.consulta-resumo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-mid);
+  flex-wrap: wrap;
+}
+
+.consulta-resumo .sep {
+  color: var(--border-hover);
+}
+
+.btn-consultar {
+  background: var(--accent);
+  color: #0a0a0f;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.btn-consultar:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .consulta-footer { flex-direction: column; align-items: stretch; }
+  .btn-consultar { text-align: center; }
+}

@@ -1,0 +1,331 @@
+.rp-root {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.rp-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 13px;
+  padding: 8px 16px;
+  margin-bottom: 32px;
+  transition: all var(--transition);
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* LOADING */
+.rp-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  gap: 20px;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.rp-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ERRO */
+.rp-erro {
+  background: rgba(255, 79, 79, 0.08);
+  border: 1px solid rgba(255, 79, 79, 0.25);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  color: var(--danger);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* HERO */
+.rp-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.rp-hero-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.rp-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+.rp-placas {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.rp-placa-badge {
+  background: var(--accent);
+  color: #0a0a0f;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+  padding: 4px 14px;
+  border-radius: 6px;
+  letter-spacing: 2px;
+}
+
+.rp-placa-alt {
+  font-size: 13px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 1px;
+}
+
+.rp-hero-left h1 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 32px);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.rp-sub {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.rp-sub span {
+  padding-right: 10px;
+  border-right: 1px solid var(--border);
+}
+
+.rp-sub span:last-child {
+  border-right: none;
+}
+
+/* STATUS */
+.rp-status-box {
+  border-radius: var(--radius);
+  padding: 20px 28px;
+  text-align: center;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.rp-status-box.ok {
+  background: rgba(71, 255, 170, 0.08);
+  border: 1px solid rgba(71, 255, 170, 0.25);
+}
+
+.rp-status-box.restricao {
+  background: rgba(255, 179, 71, 0.08);
+  border: 1px solid rgba(255, 179, 71, 0.25);
+}
+
+.rp-status-icon {
+  font-size: 28px;
+}
+
+.rp-status-box.ok .rp-status-icon { color: var(--success); }
+.rp-status-box.restricao .rp-status-icon { color: var(--warning); }
+
+.rp-status-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.rp-status-box.ok .rp-status-label { color: var(--success); }
+.rp-status-box.restricao .rp-status-label { color: var(--warning); }
+
+.rp-status-situacao {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* GRID */
+.rp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.rp-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.rp-card-full {
+  grid-column: 1 / -1;
+}
+
+.rp-card-fipe {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rp-card-ok {
+  border-color: rgba(71, 255, 170, 0.2);
+  background: rgba(71, 255, 170, 0.03);
+}
+
+.rp-card-alerta {
+  border-color: rgba(255, 179, 71, 0.25);
+  background: rgba(255, 179, 71, 0.04);
+}
+
+.rp-card-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+/* FICHA */
+.rp-ficha {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.rp-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.rp-row:last-child { border-bottom: none; }
+.rp-row span { color: var(--text-muted); }
+.rp-row strong { color: var(--text); font-weight: 500; }
+
+/* FIPE */
+.rp-fipe-valor {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.rp-fipe-modelo {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.4;
+}
+
+.rp-fipe-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.rp-fipe-meta span {
+  padding-right: 8px;
+  border-right: 1px solid var(--border);
+}
+
+.rp-fipe-meta span:last-child { border-right: none; }
+
+.rp-fipe-score {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.rp-fipe-score strong { color: var(--accent); }
+
+/* RESTRIÇÕES */
+.rp-restricoes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rp-restricoes li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--warning);
+}
+
+.rp-restricoes li::before {
+  content: '▸';
+  color: var(--warning);
+  font-size: 12px;
+}
+
+.rp-ok-text {
+  font-size: 14px;
+  color: var(--success);
+}
+
+.rp-data {
+  margin-top: 24px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+@media (max-width: 700px) {
+  .rp-grid { grid-template-columns: 1fr; }
+  .rp-card-full { grid-column: 1; }
+  .rp-hero { flex-direction: column; }
+  .rp-status-box { width: 100%; }
+  .rp-hero-left { flex-direction: column; gap: 12px; }
+}

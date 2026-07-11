@@ -18,6 +18,7 @@ export default function Navbar() {
         <span className="navbar-name">VerifiCar</span>
       </div>
       <div className="navbar-right">
+        <button className="navbar-link" onClick={() => navigate('/perfil')}>Meus veículos</button>
         <span className="navbar-user">{user?.email}</span>
         <button className="navbar-logout" onClick={handleLogout}>Sair</button>
       </div>

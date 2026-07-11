@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
-import { consultarFipe } from '../services/api'
+import SalvarVeiculoButton from '../components/SalvarVeiculoButton'
+import CompararButton from '../components/CompararButton'
+import NotaBar from '../components/NotaBar'
+import { getAnaliseCompleta } from '../services/api'
 import './ResultadoPage.css'
 
-function NotaBar({ label, valor }) {
-  const pct = (valor / 5) * 100
-  const cor = valor >= 4 ? 'var(--success)' : valor >= 3 ? 'var(--warning)' : 'var(--danger)'
+function ListaSeparada({ texto }) {
+  if (!texto) return <span>—</span>
+  const itens = texto.split(';').map(s => s.trim()).filter(Boolean)
+  if (itens.length <= 1) return <p className="res-texto">{texto}</p>
   return (
-    <div className="nota-item">
-      <div className="nota-label">{label}</div>
-      <div className="nota-bar-wrap">
-        <div className="nota-bar" style={{ width: `${pct}%`, background: cor }} />
-      </div>
-      <div className="nota-val" style={{ color: cor }}>{valor?.toFixed(1)}</div>
-    </div>
+    <ul className="res-lista">
+      {itens.map((item, i) => <li key={i}>{item}</li>)}
+    </ul>
   )
 }
 
@@ -28,7 +28,15 @@ export default function ResultadoPage() {
   useEffect(() => {
     if (!state?.marca) { navigate('/consulta'); return }
 
-    consultarFipe(state.marca, state.modelo, state.ano)
+    getAnaliseCompleta(
+      state.marca,
+      state.modelo,
+      state.ano,
+      state.quilometragem || 0,
+      state.condicao || 'Não sei',
+      state.placa || null,
+      state.detalhes || {}
+    )
       .then(setData)
       .catch(err => {
         if (err.response?.status === 404)
@@ -39,29 +47,53 @@ export default function ResultadoPage() {
       .finally(() => setLoading(false))
   }, [])
 
-  const dc = data?.dadosComplementares
+  const analise = data?.analise
+  const prec = data?.precificacao
+
+  // Sem valor FIPE real (combinação não encontrada na tabela) não há o que salvar/comparar
+  const veiculoAtual = data?.valorFipeNumerico ? {
+    marca: data.marca,
+    modelo: data.modelo,
+    anoModelo: data.anoModelo,
+    placa: state?.placa || null,
+    valorFipe: data.valorFipeNumerico,
+    valorEstimado: prec?.valorEstimado ?? null,
+    percentualAjuste: prec?.percentualAjuste ?? null,
+    notaGeral: analise?.notaGeral ?? null,
+    notaConfiabilidade: analise?.notaConfiabilidade ?? null,
+    notaCustoManutencao: analise?.notaCustoManutencao ?? null,
+    notaConforto: analise?.notaConforto ?? null,
+    notaDesempenho: analise?.notaDesempenho ?? null,
+    notaConsumo: analise?.notaConsumo ?? null,
+    notaEspacoInterno: analise?.notaEspacoInterno ?? null,
+  } : null
 
   return (
     <div className="resultado-root">
       <Navbar />
       <main className="resultado-main">
 
-        <button className="back-btn" onClick={() => navigate('/consulta')}>
-          ← Nova consulta
-        </button>
+        <div className="resultado-actions">
+          <button className="back-btn" onClick={() => navigate('/consulta')}>
+            ← Nova consulta
+          </button>
+          {veiculoAtual && !loading && (
+            <div className="resultado-actions-right">
+              <SalvarVeiculoButton veiculo={veiculoAtual} />
+              <CompararButton veiculoAtual={veiculoAtual} />
+            </div>
+          )}
+        </div>
 
         {loading && (
           <div className="resultado-loading">
             <div className="loading-spinner" />
-            <p>Consultando tabela FIPE...</p>
+            <p>Gerando análise completa...</p>
+            <span className="loading-hint">Consultando FIPE e analisando o veículo com IA...</span>
           </div>
         )}
 
-        {erro && (
-          <div className="resultado-erro">
-            <span>⚠</span> {erro}
-          </div>
-        )}
+        {erro && <div className="resultado-erro"><span>⚠</span> {erro}</div>}
 
         {data && !loading && (
           <div className="resultado-content">
@@ -69,11 +101,8 @@ export default function ResultadoPage() {
             {/* HERO */}
             <div className="res-hero">
               <div className="res-hero-info">
-                <div className="res-codigo">Código FIPE: {data.codigoFipe}</div>
                 <h1>{data.marca} {data.modelo}</h1>
-                <div className="res-sub">
-                  {data.anoModelo} · {data.combustivel} · {data.mesReferencia}
-                </div>
+                <div className="res-sub">{data.anoModelo} · {data.mesReferencia}</div>
               </div>
               <div className="res-preco-box">
                 <div className="res-preco-label">Valor FIPE</div>
@@ -82,78 +111,107 @@ export default function ResultadoPage() {
               </div>
             </div>
 
-            {/* SEM DADOS COMPLEMENTARES */}
-            {!dc && (
-              <div className="res-no-data">
-                <span>ℹ</span>
-                Esse veículo ainda não possui análise detalhada cadastrada na plataforma.
-                Só o valor FIPE está disponível.
-              </div>
-            )}
+            <div className="res-grid">
 
-            {/* COM DADOS COMPLEMENTARES */}
-            {dc && (
-              <div className="res-grid">
-
-                {/* FICHA TÉCNICA */}
-                <div className="res-card">
-                  <h2 className="res-card-title">Ficha técnica</h2>
-                  <div className="ficha-grid">
-                    {dc.versao && <div className="ficha-item"><span>Versão</span><strong>{dc.versao}</strong></div>}
-                    {dc.motorizacao && <div className="ficha-item"><span>Motorização</span><strong>{dc.motorizacao}</strong></div>}
-                    {dc.aspiracao && <div className="ficha-item"><span>Aspiração</span><strong>{dc.aspiracao}</strong></div>}
-                    {dc.cambio && <div className="ficha-item"><span>Câmbio</span><strong>{dc.cambio}</strong></div>}
-                    {dc.categoria && <div className="ficha-item"><span>Categoria</span><strong>{dc.categoria}</strong></div>}
-                    {dc.paisOrigem && <div className="ficha-item"><span>País de origem</span><strong>{dc.paisOrigem}</strong></div>}
-                    <div className="ficha-item"><span>Importado</span><strong>{dc.importado ? 'Sim' : 'Não'}</strong></div>
-                  </div>
-                </div>
-
-                {/* AVALIAÇÃO */}
-                <div className="res-card">
+              {/* PRECIFICAÇÃO */}
+              {prec && (
+                <div className="res-card res-card-full res-card-prec">
                   <h2 className="res-card-title">
-                    Avaliação geral
-                    <span className="nota-geral">{dc.notaGeral?.toFixed(1)}</span>
+                    Precificação inteligente
+                    <span className={`prec-badge ${prec.percentualAjuste >= 0 ? 'positivo' : 'negativo'}`}>
+                      {prec.percentualAjuste >= 0 ? '+' : ''}{prec.percentualAjuste}%
+                    </span>
                   </h2>
-                  <div className="notas-list">
-                    <NotaBar label="Consumo" valor={dc.notaConsumo} />
-                    <NotaBar label="Conforto" valor={dc.notaConforto} />
-                    <NotaBar label="Desempenho" valor={dc.notaDesempenho} />
-                    <NotaBar label="Confiabilidade" valor={dc.notaConfiabilidade} />
-                    <NotaBar label="Custo de manutenção" valor={dc.notaCustoManutencao} />
-                    <NotaBar label="Espaço interno" valor={dc.notaEspacoInterno} />
+                  <div className="prec-grid">
+                    <div className="prec-item">
+                      <span>Valor estimado</span>
+                      <strong className="prec-valor">
+                        {prec.valorEstimado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                      </strong>
+                    </div>
+                    <div className="prec-item">
+                      <span>Faixa de negociação</span>
+                      <strong>{prec.faixaMinima} — {prec.faixaMaxima}</strong>
+                    </div>
+                  </div>
+                  <p className="prec-recomendacao">{prec.recomendacao}</p>
+                  <div className="prec-fatores">
+                    {prec.fatoresAjuste.map((f, i) => <span key={i} className="prec-fator">{f}</span>)}
                   </div>
                 </div>
+              )}
 
-                {/* DESCRIÇÃO */}
-                {dc.descricao && (
-                  <div className="res-card res-card-full">
-                    <h2 className="res-card-title">Sobre o veículo</h2>
-                    <p className="res-descricao">{dc.descricao}</p>
+              {/* ANÁLISE IA */}
+              {analise && (
+                <>
+                  {/* AVALIAÇÃO */}
+                  <div className="res-card">
+                    <h2 className="res-card-title">
+                      Avaliação geral
+                      <span className="nota-geral">{analise.notaGeral?.toFixed(1)}</span>
+                    </h2>
+                    <div className="notas-list">
+                      <NotaBar label="Confiabilidade" valor={analise.notaConfiabilidade} />
+                      <NotaBar label="Custo manutenção" valor={analise.notaCustoManutencao} />
+                      <NotaBar label="Conforto" valor={analise.notaConforto} />
+                      <NotaBar label="Desempenho" valor={analise.notaDesempenho} />
+                      <NotaBar label="Consumo" valor={analise.notaConsumo} />
+                      <NotaBar label="Espaço interno" valor={analise.notaEspacoInterno} />
+                    </div>
+                    {analise.geradoPorIA && (
+                      <div className="ia-badge">✦ Análise gerada por IA</div>
+                    )}
                   </div>
-                )}
 
-                {/* PONTOS */}
-                <div className="res-card">
-                  <h2 className="res-card-title">✓ Pontos positivos</h2>
-                  <p className="res-texto positivo">{dc.pontosPositivos || '—'}</p>
-                </div>
+                  {/* RESUMO */}
+                  {analise.resumoGeral && (
+                    <div className="res-card">
+                      <h2 className="res-card-title">Sobre o veículo</h2>
+                      <p className="res-descricao">{analise.resumoGeral}</p>
+                    </div>
+                  )}
 
-                <div className="res-card">
-                  <h2 className="res-card-title">✕ Pontos negativos</h2>
-                  <p className="res-texto negativo">{dc.pontosNegativos || '—'}</p>
-                </div>
-
-                {/* PROBLEMAS CRÔNICOS */}
-                {dc.problemasCronicos && (
-                  <div className="res-card res-card-full res-card-alerta">
-                    <h2 className="res-card-title">⚠ Problemas crônicos conhecidos</h2>
-                    <p className="res-texto">{dc.problemasCronicos}</p>
+                  {/* PONTOS POSITIVOS */}
+                  <div className="res-card">
+                    <h2 className="res-card-title positivo-title">✓ Pontos positivos</h2>
+                    <ListaSeparada texto={analise.pontosPositivos} />
                   </div>
-                )}
 
-              </div>
-            )}
+                  {/* PONTOS NEGATIVOS */}
+                  <div className="res-card">
+                    <h2 className="res-card-title negativo-title">✕ Pontos negativos</h2>
+                    <ListaSeparada texto={analise.pontosNegativos} />
+                  </div>
+
+                  {/* PROBLEMAS CRÔNICOS */}
+                  {analise.problemasCronicos && (
+                    <div className="res-card res-card-full res-card-alerta">
+                      <h2 className="res-card-title">⚠ Problemas crônicos conhecidos</h2>
+                      <ListaSeparada texto={analise.problemasCronicos} />
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/* HISTÓRICO */}
+              {data.historico?.length > 0 && (
+                <div className="res-card res-card-full">
+                  <h2 className="res-card-title">Histórico de eventos</h2>
+                  <div className="historico-list">
+                    {data.historico.map(h => (
+                      <div key={h.id} className="historico-item">
+                        <div className="historico-tipo">{h.tipoEvento}</div>
+                        <div className="historico-desc">{h.descricao}</div>
+                        <div className="historico-data">
+                          {new Date(h.dataEvento).toLocaleDateString('pt-BR')} · {h.fonte}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+            </div>
           </div>
         )}
       </main>

@@ -26,8 +26,7 @@ export default function LoginPage() {
         authLogin(token)
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Credenciais inválidas.')
-    } finally {
+        setError(err.response?.data?.mensagem || err.response?.data?.message || 'Credenciais inválidas.')    } finally {
       setLoading(false)
     }
   }
@@ -40,7 +39,7 @@ export default function LoginPage() {
           <span className="login-brand-name">VerifiCar</span>
         </div>
         <div className="login-hero">
-          <h1>Compre com<br /><em>certeza.</em></h1>
+          <h1>Faça <em>bons negócios.</em></h1>
           <p>Consulte o valor FIPE atualizado, histórico e análise completa de qualquer veículo antes de fechar negócio.</p>
         </div>
         <div className="login-badges">

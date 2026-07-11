@@ -1,0 +1,160 @@
+.perfil-root {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.perfil-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.perfil-header {
+  margin-bottom: 32px;
+}
+
+.perfil-header h1 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.perfil-header p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.perfil-erro {
+  background: rgba(255, 79, 79, 0.08);
+  border: 1px solid rgba(255, 79, 79, 0.25);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  color: var(--danger);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.perfil-loading {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.perfil-vazio {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.perfil-vazio p {
+  color: var(--text-muted);
+}
+
+.btn-consultar {
+  background: var(--accent);
+  color: #0a0a0f;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--transition);
+}
+
+.btn-consultar:hover {
+  opacity: 0.9;
+}
+
+.perfil-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.perfil-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color var(--transition);
+}
+
+.perfil-card:hover {
+  border-color: var(--border-hover);
+}
+
+.perfil-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.perfil-card-header h2 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.perfil-remover {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 12px;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+
+.perfil-remover:hover:not(:disabled) {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.perfil-card-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.perfil-card-valores {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.perfil-card-valores div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+}
+
+.perfil-card-valores span {
+  color: var(--text-muted);
+}
+
+.perfil-card-valores strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.perfil-card-data {
+  font-size: 11px;
+  color: var(--text-muted);
+}

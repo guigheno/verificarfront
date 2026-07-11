@@ -1,0 +1,31 @@
+.btn-salvar-veiculo {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-mid);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.btn-salvar-veiculo:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-salvar-veiculo:disabled {
+  cursor: default;
+}
+
+.btn-salvar-veiculo.salvo {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim2);
+}
+
+.btn-salvar-veiculo.erro {
+  border-color: rgba(255, 79, 79, 0.4);
+  color: var(--danger);
+}

@@ -50,6 +50,19 @@
   color: var(--text-muted);
 }
 
+.navbar-link {
+  background: transparent;
+  border: none;
+  color: var(--text-mid);
+  font-size: 13px;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.navbar-link:hover {
+  color: var(--accent);
+}
+
 .navbar-logout {
   background: transparent;
   border: 1px solid var(--border);

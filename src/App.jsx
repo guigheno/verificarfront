@@ -4,6 +4,8 @@ import LoginPage from './pages/LoginPage'
 import ConsultaPage from './pages/ConsultaPage'
 import ResultadoPage from './pages/ResultadoPage'
 import ResultadoPlacaPage from './pages/ResultadoPlacaPage'
+import PerfilPage from './pages/PerfilPage'
+import CompararPage from './pages/CompararPage'
 
 function PrivateRoute({ children }) {
   const { isAuthenticated } = useAuth()
@@ -24,6 +26,8 @@ export default function App() {
           <Route path="/consulta" element={<PrivateRoute><ConsultaPage /></PrivateRoute>} />
           <Route path="/resultado" element={<PrivateRoute><ResultadoPage /></PrivateRoute>} />
           <Route path="/resultado-placa" element={<PrivateRoute><ResultadoPlacaPage /></PrivateRoute>} />
+          <Route path="/perfil" element={<PrivateRoute><PerfilPage /></PrivateRoute>} />
+          <Route path="/comparar" element={<PrivateRoute><CompararPage /></PrivateRoute>} />
           <Route path="*" element={<Navigate to="/consulta" replace />} />
         </Routes>
       </BrowserRouter>

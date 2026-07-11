@@ -9,6 +9,20 @@
   padding: 40px 24px 60px;
 }
 
+.resultado-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.resultado-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .back-btn {
   background: transparent;
   border: 1px solid var(--border);
@@ -16,7 +30,6 @@
   color: var(--text-muted);
   font-size: 13px;
   padding: 8px 16px;
-  margin-bottom: 32px;
   transition: all var(--transition);
   display: inline-flex;
 }
@@ -270,4 +283,163 @@
   .res-hero { flex-direction: column; }
   .res-preco-box { width: 100%; }
   .nota-label { min-width: 110px; font-size: 12px; }
+}
+
+/* LOADING HINT */
+.loading-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: -10px;
+}
+
+/* PRECIFICAÇÃO */
+.res-card-prec {
+  border-color: rgba(232, 255, 71, 0.2);
+  background: rgba(232, 255, 71, 0.03);
+}
+
+.prec-grid {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.prec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.prec-item span {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.prec-valor {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--accent);
+}
+
+.prec-item strong {
+  font-size: 15px;
+  color: var(--text);
+}
+
+.prec-badge {
+  font-size: 13px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-weight: 700;
+}
+
+.prec-badge.positivo {
+  background: rgba(71, 255, 170, 0.15);
+  color: var(--success);
+}
+
+.prec-badge.negativo {
+  background: rgba(255, 79, 79, 0.12);
+  color: var(--danger);
+}
+
+.prec-recomendacao {
+  font-size: 13px;
+  color: var(--text-mid);
+  margin-bottom: 14px;
+  font-style: italic;
+}
+
+.prec-fatores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.prec-fator {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 10px;
+}
+
+/* IA BADGE */
+.ia-badge {
+  margin-top: 14px;
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* LISTAS */
+.res-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.res-lista li {
+  font-size: 14px;
+  color: var(--text-mid);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.res-lista li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.positivo-title { color: var(--success); }
+.negativo-title { color: var(--danger); }
+
+/* HISTÓRICO */
+.historico-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.historico-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.historico-item:last-child { border-bottom: none; }
+
+.historico-tipo {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-dim2);
+  border: 1px solid rgba(232,255,71,0.15);
+  border-radius: 6px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.historico-desc {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text-mid);
+}
+
+.historico-data {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
 }

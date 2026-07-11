@@ -1,0 +1,184 @@
+.comp-root {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.comp-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+.comp-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.comp-trocar {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-mid);
+  font-size: 13px;
+  padding: 8px 16px;
+  transition: all var(--transition);
+}
+
+.comp-trocar:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.comp-header {
+  margin-bottom: 28px;
+}
+
+.comp-header h1 {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.comp-header p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.comp-loading {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.comp-erro {
+  background: rgba(255, 79, 79, 0.08);
+  border: 1px solid rgba(255, 79, 79, 0.25);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  color: var(--danger);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.comp-vazio {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.comp-vazio p {
+  color: var(--text-muted);
+}
+
+.comp-instrucao {
+  color: var(--text-mid);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.comp-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.comp-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  transition: all var(--transition);
+}
+
+.comp-item:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim2);
+}
+
+.comp-item strong {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.comp-item span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* GRID LADO A LADO */
+.comp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.comp-coluna {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.comp-tag {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  background: var(--accent-dim2);
+  border: 1px solid rgba(232, 255, 71, 0.2);
+  border-radius: 99px;
+  padding: 4px 12px;
+}
+
+/* Dentro da coluna, o hero/cards ficam mais compactos que na tela de resultado */
+.comp-coluna .comp-hero {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.comp-coluna .res-hero-info h1 {
+  font-size: clamp(18px, 3vw, 24px);
+}
+
+.comp-coluna .res-preco-box {
+  width: 100%;
+}
+
+.comp-coluna .res-card {
+  padding: 18px;
+}
+
+.comp-card-vazio {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+@media (max-width: 700px) {
+  .comp-grid {
+    grid-template-columns: 1fr;
+  }
+}

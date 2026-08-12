@@ -34,6 +34,7 @@ export default function Navbar() {
           </span>
         </div>
         <button className="navbar-link" onClick={() => navigate('/perfil')}>Meus veículos</button>
+        {isAdmin && <button className="navbar-admin" onClick={() => navigate('/admin')}>Menu Admin</button>}
         <span className="navbar-user">{user?.email}</span>
         <button className="navbar-logout" onClick={handleLogout}>Sair</button>
       </div>

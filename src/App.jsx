@@ -6,10 +6,17 @@ import ResultadoPage from './pages/ResultadoPage'
 import ResultadoPlacaPage from './pages/ResultadoPlacaPage'
 import PerfilPage from './pages/PerfilPage'
 import CompararPage from './pages/CompararPage'
+import AdminPage from './pages/AdminPage'
 
 function PrivateRoute({ children }) {
   const { isAuthenticated } = useAuth()
   return isAuthenticated ? children : <Navigate to="/login" replace />
+}
+
+function AdminRoute({ children }) {
+  const { isAuthenticated, user } = useAuth()
+  if (!isAuthenticated) return <Navigate to="/login" replace />
+  return user?.role === 'Admin' ? children : <Navigate to="/consulta" replace />
 }
 
 function PublicRoute({ children }) {
@@ -28,6 +35,7 @@ export default function App() {
           <Route path="/resultado-placa" element={<PrivateRoute><ResultadoPlacaPage /></PrivateRoute>} />
           <Route path="/perfil" element={<PrivateRoute><PerfilPage /></PrivateRoute>} />
           <Route path="/comparar" element={<PrivateRoute><CompararPage /></PrivateRoute>} />
+          <Route path="/admin" element={<AdminRoute><AdminPage /></AdminRoute>} />
           <Route path="*" element={<Navigate to="/consulta" replace />} />
         </Routes>
       </BrowserRouter>

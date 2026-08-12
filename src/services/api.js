@@ -79,4 +79,11 @@ export const listarVeiculosSalvos = () =>
 export const removerVeiculoSalvo = (id) =>
   api.delete(`/veiculos-salvos/${id}`).then(r => r.data)
 
+// Admin
+export const listarUsuarios = () =>
+  api.get('/users').then(r => r.data)
+
+export const adicionarConsultas = (id, dto) =>
+  api.put(`/users/${id}/consultas`, dto).then(r => r.data)
+
 export default api

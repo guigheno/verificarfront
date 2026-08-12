@@ -29,6 +29,9 @@ export const login = (email, password) =>
 export const register = (name, email, password) =>
   api.post('/auth/register', { name, email, password }).then(r => r.data)
 
+export const getMe = () =>
+  api.get('/auth/me').then(r => r.data)
+
 // Consulta FIPE (dropdowns)
 export const getMarcas = () =>
   api.get('/consulta/marcas').then(r => r.data)

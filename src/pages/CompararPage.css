@@ -145,7 +145,7 @@
   letter-spacing: 0.5px;
   color: var(--accent);
   background: var(--accent-dim2);
-  border: 1px solid rgba(232, 255, 71, 0.2);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
   border-radius: 99px;
   padding: 4px 12px;
 }

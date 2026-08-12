@@ -365,8 +365,8 @@
 
 /* PRECIFICAÇÃO (reaproveitando classes do ResultadoPage) */
 .rp-card-prec {
-  border-color: rgba(232, 255, 71, 0.2);
-  background: rgba(232, 255, 71, 0.03);
+  border-color: rgba(var(--accent-rgb), 0.2);
+  background: rgba(var(--accent-rgb), 0.03);
 }
 
 .prec-grid {

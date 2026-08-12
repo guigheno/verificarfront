@@ -110,7 +110,7 @@
 
 .res-preco-box {
   background: var(--accent-dim);
-  border: 1px solid rgba(232, 255, 71, 0.2);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
   border-radius: var(--radius);
   padding: 20px 28px;
   text-align: center;
@@ -294,8 +294,8 @@
 
 /* PRECIFICAÇÃO */
 .res-card-prec {
-  border-color: rgba(232, 255, 71, 0.2);
-  background: rgba(232, 255, 71, 0.03);
+  border-color: rgba(var(--accent-rgb), 0.2);
+  background: rgba(var(--accent-rgb), 0.03);
 }
 
 .prec-grid {
@@ -426,7 +426,7 @@
   font-weight: 600;
   color: var(--accent);
   background: var(--accent-dim2);
-  border: 1px solid rgba(232,255,71,0.15);
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
   border-radius: 6px;
   padding: 3px 10px;
   white-space: nowrap;

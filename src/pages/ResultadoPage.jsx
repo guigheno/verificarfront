@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import SalvarVeiculoButton from '../components/SalvarVeiculoButton'
 import CompararButton from '../components/CompararButton'
 import NotaBar from '../components/NotaBar'
+import { useAuth } from '../contexts/AuthContext'
 import { getAnaliseCompleta } from '../services/api'
 import './ResultadoPage.css'
 
@@ -21,6 +22,7 @@ function ListaSeparada({ texto }) {
 export default function ResultadoPage() {
   const { state } = useLocation()
   const navigate = useNavigate()
+  const { refreshProfile } = useAuth()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [erro, setErro] = useState('')
@@ -37,9 +39,11 @@ export default function ResultadoPage() {
       state.placa || null,
       state.detalhes || {}
     )
-      .then(setData)
+      .then(data => { setData(data); refreshProfile() })
       .catch(err => {
-        if (err.response?.status === 404)
+        if (err.response?.status === 403)
+          setErro(err.response.data?.mensagem || 'Você atingiu o limite de consultas.')
+        else if (err.response?.status === 404)
           setErro('Veículo não encontrado na tabela FIPE para o ano selecionado.')
         else
           setErro('Erro ao consultar a API. Tente novamente.')

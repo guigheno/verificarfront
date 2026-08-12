@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { login, register } from '../services/api'
+import ThemeToggle from '../components/ThemeToggle'
 import './LoginPage.css'
 
 export default function LoginPage() {
@@ -33,6 +34,9 @@ export default function LoginPage() {
 
   return (
     <div className="login-root">
+      <div className="login-theme-toggle">
+        <ThemeToggle />
+      </div>
       <div className="login-left">
         <div className="login-brand">
           <span className="login-logo">V</span>

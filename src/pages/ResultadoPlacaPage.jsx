@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import SalvarVeiculoButton from '../components/SalvarVeiculoButton'
 import CompararButton from '../components/CompararButton'
 import NotaBar from '../components/NotaBar'
+import { useAuth } from '../contexts/AuthContext'
 import { consultarPlaca, getAnaliseCompleta } from '../services/api'
 import './ResultadoPlacaPage.css'
 
@@ -30,6 +31,7 @@ function ListaSeparada({ texto }) {
 export default function ResultadoPlacaPage() {
   const { state } = useLocation()
   const navigate = useNavigate()
+  const { refreshProfile } = useAuth()
 
   const [placa, setPlaca] = useState(null)
   const [analise, setAnalise] = useState(null)
@@ -45,6 +47,7 @@ export default function ResultadoPlacaPage() {
       .then(async (dadosPlaca) => {
         setPlaca(dadosPlaca)
         setLoadingPlaca(false)
+        refreshProfile()
 
         // 2. Com os dados da placa, busca análise completa
         const anoInt = parseInt(dadosPlaca.anoModelo) || parseInt(dadosPlaca.anoFabricacao) || 0
@@ -70,7 +73,9 @@ export default function ResultadoPlacaPage() {
         }
       })
       .catch(err => {
-        if (err.response?.status === 404)
+        if (err.response?.status === 403)
+          setErro(err.response.data?.mensagem || 'Você atingiu o limite de consultas.')
+        else if (err.response?.status === 404)
           setErro(`Placa "${state.placa}" não encontrada.`)
         else if (err.response?.status === 400)
           setErro(err.response.data?.mensagem || 'Placa inválida.')

@@ -5,7 +5,7 @@
   padding: 0 40px;
   height: 64px;
   border-bottom: 1px solid var(--border);
-  background: rgba(10, 10, 15, 0.85);
+  background: var(--bg-glass);
   backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
@@ -42,7 +42,39 @@
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 14px;
+}
+
+.navbar-consultas {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.consulta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-mid);
+  background: var(--bg-input);
+}
+
+.consulta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #0a0a0f;
+  font-size: 10px;
+  font-weight: 800;
 }
 
 .navbar-user {

@@ -26,8 +26,8 @@ api.interceptors.response.use(
 export const login = (email, password) =>
   api.post('/auth/login', { email, password }).then(r => r.data.token)
 
-export const register = (name, email, password) =>
-  api.post('/auth/register', { name, email, password }).then(r => r.data)
+export const register = (name, email, password, codigoLink = null) =>
+  api.post('/auth/register', { name, email, password, codigoLink }).then(r => r.data)
 
 export const getMe = () =>
   api.get('/auth/me').then(r => r.data)
@@ -85,5 +85,21 @@ export const listarUsuarios = () =>
 
 export const adicionarConsultas = (id, dto) =>
   api.put(`/users/${id}/consultas`, dto).then(r => r.data)
+
+// Links de registro (Admin)
+export const validarRegistrationLink = (token) =>
+  api.get(`/registration-links/validar/${token}`).then(r => r.data)
+
+export const listarRegistrationLinks = () =>
+  api.get('/registration-links').then(r => r.data)
+
+export const criarRegistrationLink = (dto) =>
+  api.post('/registration-links', dto).then(r => r.data)
+
+export const atualizarRegistrationLink = (id, dto) =>
+  api.put(`/registration-links/${id}`, dto).then(r => r.data)
+
+export const excluirRegistrationLink = (id) =>
+  api.delete(`/registration-links/${id}`).then(r => r.data)
 
 export default api

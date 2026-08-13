@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { login, register } from '../services/api'
 import ThemeToggle from '../components/ThemeToggle'
@@ -6,10 +7,12 @@ import './LoginPage.css'
 
 export default function LoginPage() {
   const { login: authLogin } = useAuth()
+  const [searchParams] = useSearchParams()
   const [mode, setMode] = useState('login') // 'login' | 'register'
   const [form, setForm] = useState({ name: '', email: '', password: '' })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [sucesso, setSucesso] = useState(searchParams.get('cadastrado') === '1')
 
   const handle = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
 
@@ -17,6 +20,7 @@ export default function LoginPage() {
     e.preventDefault()
     setLoading(true)
     setError('')
+    setSucesso(false)
     try {
       if (mode === 'login') {
         const token = await login(form.email, form.password)
@@ -104,6 +108,9 @@ export default function LoginPage() {
             </div>
 
             {error && <div className="login-error">{error}</div>}
+            {sucesso && !error && (
+              <div className="login-sucesso">Conta criada com sucesso. Faça login para começar.</div>
+            )}
 
             <button type="submit" className="btn-primary" disabled={loading}>
               {loading ? <span className="spinner" /> : mode === 'login' ? 'Entrar' : 'Criar conta'}

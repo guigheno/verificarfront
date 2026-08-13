@@ -7,6 +7,7 @@ import ResultadoPlacaPage from './pages/ResultadoPlacaPage'
 import PerfilPage from './pages/PerfilPage'
 import CompararPage from './pages/CompararPage'
 import AdminPage from './pages/AdminPage'
+import RegistroPage from './pages/RegistroPage'
 
 function PrivateRoute({ children }) {
   const { isAuthenticated } = useAuth()
@@ -30,6 +31,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
+          <Route path="/registro/:token" element={<RegistroPage />} />
           <Route path="/consulta" element={<PrivateRoute><ConsultaPage /></PrivateRoute>} />
           <Route path="/resultado" element={<PrivateRoute><ResultadoPage /></PrivateRoute>} />
           <Route path="/resultado-placa" element={<PrivateRoute><ResultadoPlacaPage /></PrivateRoute>} />

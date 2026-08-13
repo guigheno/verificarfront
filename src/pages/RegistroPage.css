@@ -1,0 +1,172 @@
+.registro-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: var(--bg-gradient);
+  position: relative;
+}
+
+.registro-theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.registro-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.registro-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.registro-logo {
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  color: #0a0a0f;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registro-brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--text);
+}
+
+.registro-loading {
+  color: var(--text-muted);
+  font-size: 14px;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.registro-invalido {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.registro-invalido h1 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.registro-invalido p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.registro-invalido .btn-primary {
+  display: inline-block;
+  padding: 12px 24px;
+  margin-top: 8px;
+}
+
+.registro-beneficio {
+  background: var(--accent-dim2);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin-bottom: 24px;
+}
+
+.registro-nome-link {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.registro-beneficio p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-mid);
+}
+
+.registro-beneficio strong {
+  color: var(--accent);
+}
+
+.registro-vagas {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(var(--accent-rgb), 0.25);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.registro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.registro-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.registro-form .field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-mid);
+}
+
+.registro-form .field input {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 15px;
+  color: var(--text);
+  transition: border-color var(--transition);
+}
+
+.registro-form .field input:focus {
+  border-color: var(--accent);
+}
+
+.registro-form .field input::placeholder {
+  color: var(--text-muted);
+}
+
+.registro-erro {
+  background: rgba(255, 79, 79, 0.1);
+  border: 1px solid rgba(255, 79, 79, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--danger);
+}
+
+@media (max-width: 480px) {
+  .registro-card { padding: 28px 20px; }
+}
